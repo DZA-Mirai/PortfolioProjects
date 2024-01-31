@@ -1,27 +1,35 @@
---SELECT TOP(10) * FROM PortfolioProject..CovidDeaths
---ORDER BY 3, 4
+/*
+COVID 19 Data Exploration
 
---SELECT TOP(10) * FROM PortfolioProject..CovidVaccinations
---ORDER BY 3, 4
+Skills used: Joins, CTE's, Temp Tables, Windows Functions, Aggregate Functions, Creating Views, Converting Data Types
+*/
 
---SELECT location, date, total_cases, new_cases, total_deaths, population
---FROM PortfolioProject..CovidDeaths
---ORDER BY 1, 2 
+SELECT TOP(1000) *
+FROM PortfolioProject..CovidDeaths
+Where continent IS NOT NULL
+ORDER BY 3, 4
+
+-- Select that we will be working on
+	
+SELECT location, date, total_cases, new_cases, total_deaths, population
+FROM PortfolioProject..CovidDeaths
+Where continent IS NOT NULL
+ORDER BY 1, 2 
 
 -- Total cases vs Total deaths
 -- Likelihood of dying if you contract covid in certain country
 SELECT location, date, total_cases, ISNULL(total_deaths, 0) AS total_deaths,
 	CONCAT(ISNULL(ROUND((total_deaths / total_cases) * 100, 2), 0), '%') AS DeathPercentage
 FROM PortfolioProject..CovidDeaths
-WHERE location = 'Uzbekistan'
+WHERE location = 'Uzbekistan' AND continent IS NOT NULL
 ORDER BY 1, 2 
 
 -- Total cases vs Population
--- Percent of population that got Covid
+-- Percentage of population that got Covid
 SELECT location, date, population, total_cases,
 	CONCAT(ROUND((total_cases / population) * 100, 2), '%') AS Percentage
 FROM PortfolioProject..CovidDeaths
-WHERE location = 'United States'
+--WHERE location = 'United States'
 ORDER BY 1, 2 
 
 -- Countries with Highest Infection Rate compared to Population
