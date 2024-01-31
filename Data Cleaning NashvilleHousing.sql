@@ -1,7 +1,7 @@
 /* 
+Cleaning Data in SQL queries 
 
-	Cleaning Data in SQL queries 
-
+Skills used: Windows Functions, CTE, Conditional (CASE), String functions (SUBSTRING, PARSENAME, CHARINDEX, LEN)
 */
 
 SELECT *
